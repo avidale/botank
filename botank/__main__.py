@@ -11,7 +11,7 @@ if __name__ == '__main__':
     parser.add_argument('--output', '-o', help='file to write the results')
     args = parser.parse_args()
 
-    print('Running {} turns of Botank simulation'.format(args.number))
+    print('Running {} turns of Botank simulation...\n'.format(args.number))
     results = run_simulation(url=args.url, verbose=not args.silent, n=args.number)
     print(results.summary())
     if args.output:

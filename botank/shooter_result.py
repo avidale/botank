@@ -12,8 +12,8 @@ class ShooterResults:
 
     def summary(self):
         parts = list()
-        parts.append("Summary:\n")
-        parts.append('Codes: {}'.format(', '.join([
+        parts.append("\nBotank simulation summary:\n")
+        parts.append('Codes: {}\n'.format(', '.join([
             '{} - {}'.format(k, v)
             for k, v in Counter(self.codes).most_common()
         ])))
