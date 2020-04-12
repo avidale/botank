@@ -1,11 +1,11 @@
 import setuptools
 
-with open("README.md", "r", encoding="utf-8") as fh:
+with open("README_EN.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="botank",
-    version="0.0.1",
+    version="0.0.2",
     author="David Dale",
     author_email="dale.david@mail.ru",
     description="A library for automated testing of Alice skills",
