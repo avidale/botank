@@ -10,8 +10,8 @@
 [PyPI](https://pypi.org/project/botank/).
 
 Read this in other languages: 
-[English](https://github.com/avidale/botank/README_EN.MD), 
-[Русский](https://github.com/avidale/botank/README.MD).
+[English](https://github.com/avidale/botank/blob/master/README_EN.md), 
+[Русский](https://github.com/avidale/botank).
 
 ## Самое главное
 Для установки необходимо иметь Python>=3.6 и пакетный менеджер pip 
