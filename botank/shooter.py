@@ -1,40 +1,13 @@
 import requests
-import random
 
-from botank.shooter_result import ShooterResults
 from botank.request_generator import create_request
-from botank.simple_responders import resample_text
+from botank.shooter_result import ShooterResults
+from botank.simple_responders import UserModel
 
 
-TOP_PHRASES = [
-    'привет',
-    'алиса',
-    'яндекс',
-    'а',
-    'повтори',
-    'что ты умеешь',
-    'что ты можешь',
-    'помощь',
-    'выход',
-    'выйти',
-    'домой',
-    'хватит',
-]
-
-
-def make_next_phrase(resp, message_id=1, p_skip_button=0.5, p_skip_resample=0.5):
-    buttons = resp.get('response', {}).get('buttons', [])
-    prev_text = resp.get('response', {}).get('text', '')
-    if message_id == 0:
-        return 'привет'
-    if buttons and random.uniform(0, 1) > p_skip_button:
-        return random.choice(buttons)['title']
-    if prev_text and random.uniform(0, 1) > p_skip_resample:
-        return resample_text(prev_text)
-    return random.choice(TOP_PHRASES)
-
-
-def run_simulation(url, verbose=True, n=10):
+def run_simulation(url, user_model=None, verbose=True, n=10):
+    if user_model is None:
+        user_model = UserModel()
 
     reqs = []
     resps = []
@@ -42,11 +15,15 @@ def run_simulation(url, verbose=True, n=10):
     codes = []
     resp = {}
 
+    session_id = 0
     for i in range(n):
-        text = make_next_phrase(resp, message_id=i)
+        new_session = (i == 0) or resp.get('response', {}).get('end_session', False)
+        if new_session:
+            session_id += 1
+        text = user_model.make_next_phrase(resp, message_id=i)
         if verbose:
             print('u:', text)
-        req = create_request(text, message_id=i)
+        req = create_request(text, message_id=i, new_session=new_session, session_id=session_id)
         p = requests.post(url, json=req)
         reqs.append(req)
         codes.append(p.status_code)
