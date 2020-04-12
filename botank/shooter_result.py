@@ -28,9 +28,11 @@ class ShooterResults:
 
     def write_to_disk(self, filename):
         with open(filename, 'w', encoding='utf-8') as f:
-            json.dump({
-                'requests': self.requests,
-                'responses': self.responses,
-                'times': self.times,
-                'codes': self.codes,
-            }, f)
+            for i in range(len(self.requests)):
+                json.dump({
+                    'request': self.requests[i],
+                    'response': self.responses[i],
+                    'time': self.times[i],
+                    'code': self.codes[i],
+                }, f, ensure_ascii=False)
+                f.write('\n')
