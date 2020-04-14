@@ -1,24 +1,7 @@
 from botank.copypaste_responder import copypaste
+from botank.phrases import TOP_PHRASES
 
 import random
-
-TOP_PHRASES = [
-    'привет',
-    'алиса',
-    'яндекс',
-    'а',
-    'повтори',
-    'что ты умеешь',
-    'что ты можешь',
-    'помощь',
-    'выход',
-    'выйти',
-    'домой',
-    'хватит',
-    'в меню',
-    'назад',
-    'дальше',
-]
 
 
 class UserModel:
