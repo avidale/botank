@@ -22,5 +22,6 @@ setuptools.setup(
     ],
     install_requires=[
         'requests',
+        'razdel',
     ],
 )

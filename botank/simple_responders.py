@@ -1,3 +1,5 @@
+from botank.copypaste_responder import copypaste
+
 import random
 
 TOP_PHRASES = [
@@ -13,6 +15,9 @@ TOP_PHRASES = [
     'выйти',
     'домой',
     'хватит',
+    'в меню',
+    'назад',
+    'дальше',
 ]
 
 
@@ -42,19 +47,6 @@ class UserModel:
         if buttons and random.uniform(0, 1) < self.p_button:
             return random.choice(buttons)['title']
         if prev_text and random.uniform(0, 1) < self.p_resample:
-            return resample_text(prev_text)
+            return copypaste(prev_text)
         collection_id = random.randrange(0, len(self.texts_collections))
         return random.choice(self.texts_collections[collection_id])
-
-
-def resample_text(text, lengths=(1, 5)):
-    """Generate next query as a piece of the current text.
-    Possible options:
-    - one of the quoted substrings # todo: implement it
-    - a random substring
-    - a tail of the text (with higher probability) # todo: implement it
-    """
-    tokens = text.split()
-    n = random.randint(*lengths)
-    position = random.randint(0, max(0, len(tokens) - n))
-    return ' '.join(tokens[position:(position+n)])
