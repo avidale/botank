@@ -5,7 +5,7 @@ with open("README_EN.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="botank",
-    version="0.0.3",
+    version="0.0.4",
     author="David Dale",
     author_email="dale.david@mail.ru",
     description="A library for automated testing of Alice skills",
@@ -24,4 +24,5 @@ setuptools.setup(
         'requests',
         'razdel',
     ],
+    include_package_data=True,
 )
